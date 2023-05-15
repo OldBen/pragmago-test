@@ -5,6 +5,10 @@
         {
             "name": "Piotr Ścibor",
             "email": "piotr.scibor@pragmago.tech"
+        },
+        {
+            "name": "Krzysztof Buniewicz",
+            "email": "krzysztof.buniewicz@gmail.com"
         }
     ],
     "autoload": {
