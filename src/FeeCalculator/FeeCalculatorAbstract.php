@@ -13,7 +13,7 @@ abstract class FeeCalculatorAbstract implements FeeCalculator
      * Fee structure for particular term
      * @var Array
      */
-    private $structure = [];
+    protected $structure = [];
 
     /**
      * @return float The calculated total fee.
@@ -40,11 +40,11 @@ abstract class FeeCalculatorAbstract implements FeeCalculator
             $upper_bound = key($this->structure);
             $upper_fee = current($this->structure);
 
-            if ($lower_bound < $amount && $amount < $upper_bound) {
+            if ($lower_bound <= $amount && $amount < $upper_bound) {
                 $bound_diff = $upper_bound - $lower_bound;
                 $fee_diff = $upper_fee - $lower_fee;
                 $x = ($amount - $lower_bound) / $bound_diff;
-                return $lower_fee + $fee_diff * $x;
+                return round($lower_fee + $fee_diff * $x, 2);
             }
         }
         throw new \Exception("Loan amount outside expected range");
@@ -56,8 +56,8 @@ abstract class FeeCalculatorAbstract implements FeeCalculator
      */
     private function roundFee(float $amount, float $fee): float
     {
-        $rem = fmod($amount + $fee, 5);
-        return ($rem === 0.0 ? $fee : $fee + 5 - $rem);
+        $rem = round(fmod($amount + $fee, 5), 2);
+        return floatval($rem === 0.0 ? $fee : $fee + 5 - $rem);
 
     }
 
