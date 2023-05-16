@@ -7,7 +7,7 @@ namespace PragmaGoTech\Interview\FeeCalculator;
 use PragmaGoTech\Interview\FeeCalculator;
 use PragmaGoTech\Interview\Model\LoanProposal;
 
-abstract class FeeCalculatorAbstract implements FeeCalculator
+abstract class AbstractFeeCalculator implements FeeCalculator
 {
     /**
      * Fee structure for particular term
@@ -36,7 +36,7 @@ abstract class FeeCalculatorAbstract implements FeeCalculator
         {
             $lower_bound = key($this->structure);
             $lower_fee = current($this->structure);
-            if(next($this->structure) === false) throw new \Exception("Loan amount outside expected range");
+            if(next($this->structure) === false) throw new \OutOfRangeException("Loan amount outside expected range");
             $upper_bound = key($this->structure);
             $upper_fee = current($this->structure);
 
@@ -47,7 +47,7 @@ abstract class FeeCalculatorAbstract implements FeeCalculator
                 return round($lower_fee + $fee_diff * $x, 2);
             }
         }
-        throw new \Exception("Loan amount outside expected range");
+        throw new \OutOfRangeException("Loan amount outside expected range");
     }
 
     /**

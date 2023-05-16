@@ -11,7 +11,7 @@ class FeeCalculatorFactory
     private const TERM_12_MONTHS = 12;
     private const TERM_24_MONTHS = 24;
 
-    public static function factory(LoanProposal $application): FeeCalculatorAbstract
+    public static function factory(LoanProposal $application): AbstractFeeCalculator
     {
         switch($application->term()) {
             case self::TERM_12_MONTHS:

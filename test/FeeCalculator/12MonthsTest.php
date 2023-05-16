@@ -19,6 +19,10 @@ final class FeeCalcuator12MonthsTest extends TestCase
         $app2 = new LoanProposal(12, 10000);
         $calc = FeeCalculatorFactory::factory($app2);
         $this->assertSame(floatval(200), $calc->calculate($app2));
+        $app3 = new LoanProposal(12, 25000);
+        $calc = FeeCalculatorFactory::factory($app3);
+        $this->expectException(\OutOfRangeException::class);
+        $calc->calculate($app3);
     }
 
     /**

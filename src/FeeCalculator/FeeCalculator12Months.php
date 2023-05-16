@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PragmaGoTech\Interview\FeeCalculator;
 
-class FeeCalculator12Months extends FeeCalculatorAbstract
+class FeeCalculator12Months extends AbstractFeeCalculator
 {
     protected $structure = [
         1000 => 50,
